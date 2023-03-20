@@ -1,0 +1,8 @@
+[package]
+name = "libwdi"
+version = "0.1.0"
+edition = "2021"
+authors = ["Jędrzej Boczar <jedrzej.boczar@gmail.com>"]
+
+[dependencies]
+libwdi-sys = { path = "./libwdi-sys" }
