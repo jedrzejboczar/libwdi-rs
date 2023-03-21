@@ -40,6 +40,14 @@ fn build_library() {
     println!("cargo:rustc-link-search=native={}", out_dir.display());
     println!("cargo:rustc-link-lib=static=libwdi");
     // No "rerun-if-changed", just run msbuild every time as it does it's own cacheing.
+
+    // Add libwdi link dependencies
+    println!("cargo:rustc-link-lib=setupapi");
+    println!("cargo:rustc-link-lib=ntdll");
+    // println!("cargo:rustc-link-lib=newdev");
+    println!("cargo:rustc-link-lib=user32");
+    println!("cargo:rustc-link-lib=shell32");
+    println!("cargo:rustc-link-lib=ole32");
 }
 
 fn main() {
