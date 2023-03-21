@@ -1,8 +1,29 @@
+use std::env;
 use std::io::{Write as _, BufRead};
+
+use windows::core::*;
+use windows::Win32::UI::Shell::ShellExecuteW;
+use windows::Win32::Foundation::HWND;
+use windows::core::PCWSTR;
+use windows::Win32::UI::WindowsAndMessaging::SHOW_WINDOW_CMD;
 
 use libwdi as wdi;
 
+// https://users.rust-lang.org/t/hi-guys-how-do-i-trigger-a-new-process-to-be-run-as-admin/60788/4
+fn rerun_as_admin() {
+    let exe = env::current_exe()
+        .expect("Could not get path to current executable");
+    let result = unsafe {
+        ShellExecuteW(HWND(0), &HSTRING::from("runas"), &HSTRING::from(exe.as_os_str()), PCWSTR::null(), PCWSTR::null(), SHOW_WINDOW_CMD(1))
+    };
+    if result.0 < 32 {
+        panic!("Failed to run as administrator");
+    }
+}
+
 fn main() {
+    wdi::set_log_level(wdi::LogLevel::Debug).unwrap();
+
     let devices = wdi::CreateListOptions::new()
         .list_all(true)
         .create_list()
@@ -49,8 +70,13 @@ fn main() {
                 .prepare_driver(dev, "C:\\usb_driver", "STM32BootloaderWinUSB.inf")
                 .expect("Failed to prepare driver");
 
-            driver.install_driver()
-                .expect("Failed to install driver");
+            let result = driver.install_driver();
+
+            match result {
+                Ok(_) => {},
+                Err(wdi::Error::NeedsAdmin) => rerun_as_admin(),
+                err => err.expect("Failed to install driver"),
+            }
         } else {
             println!("\nAborting");
         }

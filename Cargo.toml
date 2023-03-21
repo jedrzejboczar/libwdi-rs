@@ -7,3 +7,12 @@ authors = ["Jędrzej Boczar <jedrzej.boczar@gmail.com>"]
 [dependencies]
 libwdi-sys = { path = "./libwdi-sys" }
 thiserror = "1.0"
+
+[dev-dependencies.windows]
+version = "0.46"
+features = [
+    "Win32_Foundation",
+    "Win32_System_SystemServices",
+    "Win32_UI_Shell",
+    "Win32_UI_WindowsAndMessaging",
+]
