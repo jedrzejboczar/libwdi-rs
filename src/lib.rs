@@ -1,14 +1,7 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+mod core;
+mod enums;
+mod misc;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+pub use enums::{Error, Result, LogLevel, DriverType};
+pub use misc::{get_vendor_name, get_wdf_version, set_log_level, register_logger, unregister_logger};
+pub use crate::core::*;

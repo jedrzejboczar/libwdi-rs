@@ -6,3 +6,4 @@ authors = ["Jędrzej Boczar <jedrzej.boczar@gmail.com>"]
 
 [dependencies]
 libwdi-sys = { path = "./libwdi-sys" }
+thiserror = "1.0"
