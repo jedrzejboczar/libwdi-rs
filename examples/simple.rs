@@ -16,7 +16,7 @@ fn main() {
     println!("Found candidate devices:");
     for dev in candidates.iter() {
         let composite = if dev.is_composite() {
-            format!(" composite[{}]", dev.mi().unwrap())
+            format!(" composite[{}]", dev.mi().map(|v| v.get()).unwrap_or(0))
         } else {
             "".to_string()
         };
@@ -38,8 +38,9 @@ fn main() {
         let mut input = std::io::stdin().lock();
         let mut answer = String::new();
         input.read_line(&mut answer).unwrap();
+        let answer = answer.trim().to_lowercase();
 
-        if answer.to_lowercase() == "y" || answer.to_lowercase() == "yes" {
+        if answer == "y" || answer == "yes" {
             println!("\nInstalling ...");
 
             let driver = wdi::PrepareDriverOptions::new()
