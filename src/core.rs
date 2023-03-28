@@ -28,7 +28,7 @@ pub struct PrepareDriverOptions {
 
 /// Driver files prepared to be installed using wdi_install_driver
 pub struct PreparedDriver<'a> {
-    dev: &'a mut DeviceInfo<'a>,
+    dev: DeviceInfo<'a>,
     path: ffi::CString,
     inf_name: ffi::CString,
     options: wdi::wdi_options_install_driver,
@@ -236,7 +236,7 @@ impl PrepareDriverOptions {
     }
 
     #[doc(alias = "wdi_prepare_driver")]
-    pub fn prepare_driver<'a>(mut self, dev: &'a mut DeviceInfo<'a>, path: &str, inf_name: &str) -> Result<PreparedDriver<'a>> {
+    pub fn prepare_driver<'a>(mut self, dev: DeviceInfo<'a>, path: &str, inf_name: &str) -> Result<PreparedDriver<'a>> {
         let path = ffi::CString::new(path)?;
         let inf_name = ffi::CString::new(inf_name)?;
 
