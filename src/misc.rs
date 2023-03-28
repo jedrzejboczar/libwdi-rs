@@ -61,3 +61,11 @@ pub unsafe fn register_logger(hwnd: wdi::HWND, message_id: wdi::UINT, buff_size:
 pub unsafe fn unregister_logger(hwnd: wdi::HWND) -> Result<()> {
     check_error(wdi::wdi_unregister_logger(hwnd))
 }
+
+pub fn read_logger(buf: &mut [u8]) -> Result<usize> {
+    let mut size = 0;
+    unsafe {
+        check_error(wdi::wdi_read_logger(buf.as_mut_ptr() as *mut i8, buf.len() as u32, &mut size))?
+    }
+    Ok(size as usize)
+}
