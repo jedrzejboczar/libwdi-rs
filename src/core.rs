@@ -94,6 +94,10 @@ impl DevicesList {
     }
 }
 
+// Safety: it should be safe to send wdi_device_info between threads, it does
+// not seem to use any thread-local data and is allocated using global heap allocator
+unsafe impl Send for DevicesList {}
+
 impl Drop for DevicesList {
     fn drop(&mut self) {
         unsafe {
