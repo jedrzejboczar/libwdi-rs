@@ -10,7 +10,7 @@ keywords = ["libwdi", "usb", "driver", "winusb"]
 categories = ["api-bindings", "os"]
 
 [dependencies]
-libwdi-sys = { path = "./libwdi-sys" }
+libwdi-sys = { path = "./libwdi-sys", version = "0.1" }
 thiserror = "1.0"
 
 [dev-dependencies.windows]
