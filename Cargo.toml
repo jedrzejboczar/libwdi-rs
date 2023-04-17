@@ -3,6 +3,11 @@ name = "libwdi"
 version = "0.1.0"
 edition = "2021"
 authors = ["Jędrzej Boczar <jedrzej.boczar@gmail.com>"]
+license = "MIT OR Apache-2.0"
+description = "Rust bindings to libwdi: Windows USB Driver Installation library"
+repository = "https://github.com/jedrzejboczar/libwdi-rs"
+keywords = ["libwdi", "usb", "driver", "winusb"]
+categories = ["api-bindings", "os"]
 
 [dependencies]
 libwdi-sys = { path = "./libwdi-sys" }
