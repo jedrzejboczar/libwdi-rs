@@ -1,6 +1,6 @@
 [package]
 name = "libwdi"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Jędrzej Boczar <jedrzej.boczar@gmail.com>"]
 license = "MIT OR Apache-2.0"
@@ -10,7 +10,7 @@ keywords = ["libwdi", "usb", "driver", "winusb"]
 categories = ["api-bindings", "os"]
 
 [dependencies]
-libwdi-sys = { path = "./libwdi-sys", version = "0.1" }
+libwdi-sys = { path = "./libwdi-sys", version = "0.1.1" }
 thiserror = "1.0"
 
 [dev-dependencies.windows]
