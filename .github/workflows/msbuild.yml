@@ -1,5 +1,9 @@
 name: MSBuild
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 
 # Reference workflow: https://github.com/pbatard/libwdi/blob/master/.github/workflows/vs2022.yml
 # But we specify library directories (WDK_DIR/LIBUSB0_DIR/LIBUSBK_DIR) via env variables directly.
