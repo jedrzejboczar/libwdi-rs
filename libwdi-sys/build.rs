@@ -62,6 +62,9 @@ fn build_library() {
     for var in lib_vars {
         println!("cargo:rerun-if-env-changed={var}");
         if let Ok(dir) = env::var(var) {
+            // Replace backslashes because this is later put in C file and backslashes are
+            // interpreted as escape sequences.
+            let dir = dir.replace('\\', "/");
             let def = format!("{var}=\"{dir}\"");
             println!("Using: {def}");
             defs.push(def);
